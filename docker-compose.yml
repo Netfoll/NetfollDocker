@@ -1,7 +1,7 @@
 version: "3"
 services:
   worker:
-    container_name: "hikka-worker"
+    container_name: "netfoll-worker"
     build:
       context: .
     volumes:
