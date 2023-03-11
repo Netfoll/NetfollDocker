@@ -13,19 +13,19 @@ if ! [ -x "$(command -v docker)" ]; then
             ca-certificates \
             curl \
             gnupg-agent \
-            software-properties-common -y 1>hikka-install.log 2>&1
+            software-properties-common -y 1>netfoll-install.log 2>&1
         curl -fsSL https://download.docker.com/linux/ubuntu/gpg |
-            sudo apt-key add - 1>hikka-install.log 2>&1
+            sudo apt-key add - 1>netfoll-install.log 2>&1
         sudo add-apt-repository \
             "deb [arch=amd64] https://download.docker.com/linux/ubuntu \
             $(lsb_release -cs) \
-            stable" 1>hikka-install.log 2>&1
-        sudo apt-get update -y 1>hikka-install.log 2>&1
-        sudo apt-get install docker-ce docker-ce-cli containerd.io -y 1>hikka-install.log 2>&1
+            stable" 1>netfoll-install.log 2>&1
+        sudo apt-get update -y 1>netfoll-install.log 2>&1
+        sudo apt-get install docker-ce docker-ce-cli containerd.io -y 1>netfoll-install.log 2>&1
     elif [ -f /etc/arch-release ]; then
-        sudo pacman -Syu docker --noconfirm 1>hikka-install.log 2>&1
+        sudo pacman -Syu docker --noconfirm 1>netfoll-install.log 2>&1
     elif [ -f /etc/redhat-release ]; then
-        sudo yum install -y yum-utils 1>hikka-install.log 2>&1
+        sudo yum install -y yum-utils 1>netfoll-install.log 2>&1
         sudo yum-config-manager \
             --add-repo \
             https://download.docker.com/linux/centos/docker-ce.repo
@@ -34,7 +34,7 @@ if ! [ -x "$(command -v docker)" ]; then
     printf "\033[0;32m - success\e[0m\n"
     # Hikka uses docker-compose so we need to install that too
     printf "\033[0;34mInstalling docker-compose...\e[0m"
-    pip install -U docker-compose 1>hikka-install.log 2>&1
+    pip install -U docker-compose 1>netfoll-install.log 2>&1
     chmod +x /usr/local/bin/docker-compose
     printf "\033[0;32m - success\e[0m\n"
 else
@@ -45,11 +45,11 @@ printf "\033[0;34mDownloading configuration files...\e[0m"
 if [ -f "Dockerfile" ]; then
     rm Dockerfile
 fi
-wget -q https://github.com/MXRRI/Netfoll/raw/skeleton/Dockerfile
+wget -q https://github.com/MXRRI/Netfoll/raw/Dev/Dockerfile
 if [ -f "docker-compose.yml" ]; then
     rm docker-compose.yml
 fi
-wget -q https://github.com/MXRRI/Netfoll/raw/skeleton/docker-compose.yml
+wget -q https://github.com/MXRRI/Netfoll/raw/Dev/docker-compose.yml
 printf "\033[0;32m - success\e[0m\n"
 
 printf "\033[0;34mBuilding docker image...\e[0m"
